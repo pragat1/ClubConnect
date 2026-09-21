@@ -19,7 +19,13 @@ export type EventCardData = {
   clubs?: { name: string } | null;
 };
 
-export function EventCard({ event, registered }: { event: EventCardData; registered?: boolean }) {
+export function EventCard({
+  event,
+  registered,
+}: {
+  event: EventCardData;
+  registered?: boolean | undefined;
+}) {
   return (
     <Card className="group flex h-full flex-col overflow-hidden pt-0 transition-shadow hover:shadow-[var(--shadow-float)]">
       {event.image_url ? (
