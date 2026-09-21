@@ -1,5 +1,13 @@
 {
   "version": "7",
   "dialect": "postgresql",
-  "entries": []
+  "entries": [
+    {
+      "idx": 0,
+      "version": "7",
+      "when": 1789984823464,
+      "tag": "0000_club_connect_core_schema",
+      "breakpoints": true
+    }
+  ]
 }
