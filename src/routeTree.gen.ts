@@ -24,6 +24,8 @@ import { Route as ClubsIndexRouteImport } from './routes/clubs.index'
 import { Route as ClubsIdRouteImport } from './routes/clubs.$id'
 import { Route as EventsIndexRouteImport } from './routes/events.index'
 import { Route as EventsIdRouteImport } from './routes/events.$id'
+import { Route as AuthenticatedAdminIndexRouteImport } from './routes/_authenticated/admin.index'
+import { Route as AuthenticatedAdminClubRouteImport } from './routes/_authenticated/admin.club'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -100,6 +102,16 @@ const EventsIdRoute = EventsIdRouteImport.update({
   path: '/events/$id',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AuthenticatedAdminIndexRoute = AuthenticatedAdminIndexRouteImport.update({
+  id: '/admin/',
+  path: '/admin/',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedAdminClubRoute = AuthenticatedAdminClubRouteImport.update({
+  id: '/admin/club',
+  path: '/admin/club',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -116,6 +128,8 @@ export interface FileRoutesByFullPath {
   '/events/$id': typeof EventsIdRoute
   '/clubs/': typeof ClubsIndexRoute
   '/events/': typeof EventsIndexRoute
+  '/admin/club': typeof AuthenticatedAdminClubRoute
+  '/admin/': typeof AuthenticatedAdminIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -132,6 +146,8 @@ export interface FileRoutesByTo {
   '/events/$id': typeof EventsIdRoute
   '/clubs': typeof ClubsIndexRoute
   '/events': typeof EventsIndexRoute
+  '/admin/club': typeof AuthenticatedAdminClubRoute
+  '/admin': typeof AuthenticatedAdminIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -150,6 +166,8 @@ export interface FileRoutesById {
   '/events/$id': typeof EventsIdRoute
   '/clubs/': typeof ClubsIndexRoute
   '/events/': typeof EventsIndexRoute
+  '/_authenticated/admin/club': typeof AuthenticatedAdminClubRoute
+  '/_authenticated/admin/': typeof AuthenticatedAdminIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -168,6 +186,8 @@ export interface FileRouteTypes {
     | '/events/$id'
     | '/clubs/'
     | '/events/'
+    | '/admin/club'
+    | '/admin/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -184,6 +204,8 @@ export interface FileRouteTypes {
     | '/events/$id'
     | '/clubs'
     | '/events'
+    | '/admin/club'
+    | '/admin'
   id:
     | '__root__'
     | '/'
@@ -201,6 +223,8 @@ export interface FileRouteTypes {
     | '/events/$id'
     | '/clubs/'
     | '/events/'
+    | '/_authenticated/admin/club'
+    | '/_authenticated/admin/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -324,6 +348,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof EventsIdRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/_authenticated/admin/': {
+      id: '/_authenticated/admin/'
+      path: '/admin'
+      fullPath: '/admin/'
+      preLoaderRoute: typeof AuthenticatedAdminIndexRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/admin/club': {
+      id: '/_authenticated/admin/club'
+      path: '/admin/club'
+      fullPath: '/admin/club'
+      preLoaderRoute: typeof AuthenticatedAdminClubRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
   }
 }
 
@@ -332,6 +370,8 @@ interface AuthenticatedRouteRouteChildren {
   AuthenticatedNotificationsRoute: typeof AuthenticatedNotificationsRoute
   AuthenticatedPremiumRoute: typeof AuthenticatedPremiumRoute
   AuthenticatedProfileRoute: typeof AuthenticatedProfileRoute
+  AuthenticatedAdminClubRoute: typeof AuthenticatedAdminClubRoute
+  AuthenticatedAdminIndexRoute: typeof AuthenticatedAdminIndexRoute
 }
 
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
@@ -339,6 +379,8 @@ const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedNotificationsRoute: AuthenticatedNotificationsRoute,
   AuthenticatedPremiumRoute: AuthenticatedPremiumRoute,
   AuthenticatedProfileRoute: AuthenticatedProfileRoute,
+  AuthenticatedAdminClubRoute: AuthenticatedAdminClubRoute,
+  AuthenticatedAdminIndexRoute: AuthenticatedAdminIndexRoute,
 }
 
 const AuthenticatedRouteRouteWithChildren =
