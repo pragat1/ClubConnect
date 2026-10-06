@@ -12,6 +12,7 @@ import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Textarea } from "@/components/ui/textarea";
+import { ImageUpload } from "@/components/ImageUpload";
 import { EmptyState } from "@/components/EmptyState";
 import { PageShell } from "@/components/PageShell";
 import { useAuth, useRoles } from "@/hooks/use-auth";
@@ -134,8 +135,8 @@ function ClubFormFields({ initial, submitLabel, onSubmit }: { initial: ClubForm;
       <div className="space-y-1.5"><Label htmlFor="c-obj">Objectives</Label><Textarea id="c-obj" value={f.objectives} onChange={set("objectives")} /></div>
       <div className="space-y-1.5"><Label htmlFor="c-act">Activities</Label><Textarea id="c-act" value={f.activities} onChange={set("activities")} /></div>
       <div className="grid gap-3 sm:grid-cols-2">
-        <div className="space-y-1.5"><Label htmlFor="c-logo">Logo URL</Label><Input id="c-logo" type="url" value={f.logo_url} onChange={set("logo_url")} /></div>
-        <div className="space-y-1.5"><Label htmlFor="c-banner">Banner URL</Label><Input id="c-banner" type="url" value={f.banner_url} onChange={set("banner_url")} /></div>
+        <ImageUpload id="c-logo" label="Logo" value={f.logo_url} onChange={(url) => setF((p) => ({ ...p, logo_url: url }))} />
+        <ImageUpload id="c-banner" label="Banner" value={f.banner_url} onChange={(url) => setF((p) => ({ ...p, banner_url: url }))} />
       </div>
       <div className="space-y-1.5"><Label htmlFor="c-email">Contact email</Label><Input id="c-email" type="email" value={f.contact_email} onChange={set("contact_email")} /></div>
       <Button type="submit" disabled={busy}>{submitLabel}</Button>
@@ -327,7 +328,7 @@ function ClubManager({ club }: { club: Club }) {
                 <div className="space-y-1.5"><Label htmlFor="e-cap">Capacity (optional)</Label><Input id="e-cap" type="number" min={1} value={eventForm.capacity} onChange={(e) => setEventForm({ ...eventForm, capacity: e.target.value })} /></div>
                 <div className="space-y-1.5"><Label htmlFor="e-dl">Registration deadline</Label><Input id="e-dl" type="date" value={eventForm.registration_deadline} onChange={(e) => setEventForm({ ...eventForm, registration_deadline: e.target.value })} /></div>
               </div>
-              <div className="space-y-1.5"><Label htmlFor="e-img">Banner image URL</Label><Input id="e-img" type="url" value={eventForm.image_url} onChange={(e) => setEventForm({ ...eventForm, image_url: e.target.value })} /></div>
+              <ImageUpload id="e-img" label="Event picture" value={eventForm.image_url} onChange={(url) => setEventForm((p) => (p ? { ...p, image_url: url } : p))} />
               <Button type="submit" disabled={saveEvent.isPending}>Save event</Button>
             </form>
           ) : null}
