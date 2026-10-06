@@ -77,7 +77,7 @@ function ClubAdmin() {
           {clubs!.length > 1 ? (
             <div className="mb-6 max-w-sm">
               <Label htmlFor="club-select">Club</Label>
-              <Select value={selectedId ?? undefined} onValueChange={setSelectedId}>
+              <Select value={selectedId ?? ""} onValueChange={setSelectedId}>
                 <SelectTrigger id="club-select"><SelectValue /></SelectTrigger>
                 <SelectContent>{clubs!.map((c) => <SelectItem key={c.id} value={c.id}>{c.name}</SelectItem>)}</SelectContent>
               </Select>
