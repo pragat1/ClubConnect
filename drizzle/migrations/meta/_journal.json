@@ -15,6 +15,13 @@
       "when": 1791102593424,
       "tag": "0001_reminders_and_admin",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1791293460600,
+      "tag": "0002_club_media_policies_realtime",
+      "breakpoints": true
     }
   ]
 }
