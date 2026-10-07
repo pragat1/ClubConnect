@@ -8,6 +8,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { EmptyState } from "@/components/EmptyState";
 import { PageShell } from "@/components/PageShell";
+import { BrowserNotificationToggle } from "@/components/BrowserNotifications";
 import { useAuth } from "@/hooks/use-auth";
 import { supabase } from "@/integrations/supabase/client";
 import { cn } from "@/lib/utils";
@@ -77,11 +78,14 @@ function NotificationsPage() {
       title="Notifications"
       description="Registration confirmations, reminders, club announcements and new events."
       action={
-        unread > 0 ? (
-          <Button variant="outline" onClick={() => markAll.mutate()} disabled={markAll.isPending}>
-            <Check className="size-4" /> Mark all as read
-          </Button>
-        ) : null
+        <div className="flex flex-wrap gap-2">
+          <BrowserNotificationToggle />
+          {unread > 0 ? (
+            <Button variant="outline" onClick={() => markAll.mutate()} disabled={markAll.isPending}>
+              <Check className="size-4" /> Mark all as read
+            </Button>
+          ) : null}
+        </div>
       }
     >
       {isLoading ? (

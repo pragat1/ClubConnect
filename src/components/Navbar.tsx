@@ -17,6 +17,7 @@ const links = [
   { to: "/clubs", label: "Clubs" },
   { to: "/events", label: "Events" },
   { to: "/discover", label: "Discover" },
+  { to: "/match", label: "AI Match" },
 ];
 
 export function Navbar() {
