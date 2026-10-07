@@ -15,6 +15,7 @@ import { reportLovableError } from "../lib/lovable-error-reporting";
 import { Navbar } from "@/components/Navbar";
 import { AuthProvider } from "@/hooks/use-auth";
 import { Toaster } from "@/components/ui/sonner";
+import { BrowserNotificationListener } from "@/components/BrowserNotifications";
 
 function NotFoundComponent() {
   return (
@@ -140,6 +141,7 @@ function RootComponent() {
           </footer>
         </div>
         <Toaster position="top-center" />
+        <BrowserNotificationListener />
       </AuthProvider>
     </QueryClientProvider>
   );
