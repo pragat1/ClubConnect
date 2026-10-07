@@ -23,7 +23,7 @@ export function BrowserNotificationListener() {
         const n = payload.new as { title: string; message: string; type: string; link: string | null };
         if (localStorage.getItem(KEY) !== "on" || !("Notification" in window) || Notification.permission !== "granted") return;
         if (!PUSH_TYPES.includes(n.type)) return;
-        const note = new Notification(n.title, { body: n.message, icon: "/favicon.ico", tag: n.link ?? undefined });
+        const note = new Notification(n.title, { body: n.message, icon: "/favicon.ico", tag: n.link ?? "club-connect" });
         note.onclick = () => { window.focus(); if (n.link) window.location.href = n.link; };
       })
       .subscribe();
@@ -39,10 +39,10 @@ export function BrowserNotificationToggle() {
   }, []);
 
   async function enable() {
-    if (!("Notification" in window)) return toast.error("This browser doesn't support notifications.");
-    if (window.top !== window.self) return toast.error("Open the app in its own browser tab to allow notifications.");
+    if (!("Notification" in window)) { toast.error("This browser doesn't support notifications."); return; }
+    if (window.top !== window.self) { toast.error("Open the app in its own browser tab to allow notifications."); return; }
     const perm = Notification.permission === "granted" ? "granted" : await Notification.requestPermission();
-    if (perm !== "granted") return toast.error("Notifications are blocked. Allow them in your browser's site settings.");
+    if (perm !== "granted") { toast.error("Notifications are blocked. Allow them in your browser's site settings."); return; }
     localStorage.setItem(KEY, "on");
     setOn(true);
     new Notification("Club Connect", { body: "You'll get alerts for event reminders and updates from your clubs." });

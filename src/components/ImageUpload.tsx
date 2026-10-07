@@ -14,8 +14,8 @@ export function ImageUpload({ id, label, value, onChange }: { id: string; label:
   const [busy, setBusy] = useState(false);
 
   async function handleFile(file: File) {
-    if (!file.type.startsWith("image/")) return toast.error("Please choose an image file.");
-    if (file.size > MAX_BYTES) return toast.error("Image must be 5 MB or smaller.");
+    if (!file.type.startsWith("image/")) { toast.error("Please choose an image file."); return; }
+    if (file.size > MAX_BYTES) { toast.error("Image must be 5 MB or smaller."); return; }
     setBusy(true);
     try {
       const { data: u } = await supabase.auth.getUser();
